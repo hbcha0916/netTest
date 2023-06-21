@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="input_text">
+</body>
+<script>
+    $('#input_text').keyup(function(){
+        $.ajax({
+            url: "https://suggestqueries.google.com/complete/search?output=chrome&hl=ko&q=elasticsearch", // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
+            
+            method: "GET",   // HTTP 요청 메소드(GET, POST 등)
+            dataType: "json" // 서버에서 보내줄 데이터의 타입
+        })
+        .done(function(json) {
+            console.log(json);
+        })
+    });
+</script>
+</html>
