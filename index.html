@@ -6,22 +6,82 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <title>Document</title>
 </head>
+<style>
+    body{
+        text-align:center;
+    }
+</style>
 <body>
-    <input type="text" id="input_text">
+    
 </body>
 <script>
-    document.cookie = "safeCookie1=foo; SameSite=Lax"; 
-    document.cookie = "safeCookie2=foo"; 
-    document.cookie = "crossCookie=bar; SameSite=None; Secure";
-    $('#input_text').keyup(function(){
+    $(document).ready(function () {
+        document.cookie = "safeCookie1=foo; SameSite=Lax"; 
+        document.cookie = "safeCookie2=foo"; 
+        document.cookie = "crossCookie=bar; SameSite=None; Secure";
+        var no = 1;
+        var name = "차휘병";
+        var nick = "hbc";
         $.ajax({
-            url: "https://suggestqueries.google.com/complete/search?output=chrome&hl=ko&q="+$('#input_text').val(), // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
-            dataType: "jsonp",
-            method: "GET"   
+            type : 'POST',           // 타입 (get, post, put 등등)
+            url : 'http://chb0110.synology.me:7858',           // 요청할 서버url
+            async : true,            // 비동기화 여부 (default : true)
+            // headers : {              // Http header
+            //     "Content-Type" : "application/json",
+            //     "X-HTTP-Method-Override" : "POST",
+            // },
+            // dataType : 'text',       // 데이터 타입 (html, xml, json, text 등등)
+            data : JSON.stringify({  // 보낼 데이터 (Object , String, Array)
+                "no" : no,
+                "name" : name,
+                "nick" : nick
+            }),
+            success : function(result) { // 결과 성공 콜백함수
+                console.log(result);
+            },
+            error : function(request, status, error) { // 결과 에러 콜백함수
+                console.log(error)
+            }
         })
-        .done(function(json) {
-            console.log(json);
-        })
+        // $.ajax({
+        //     url: "chb0110.synology.me:7858", // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
+        //     dataType: "jsonp",
+        //     method: "GET"   
+        // })
+        // .done(function(json) {
+        //     $('.tables').empty();
+        //     for (var i = 0; i < json[1].length ; i++){
+        //         $('.tables').append('<th>'+json[1][i]+'</th>');
+        //     }
+            
+        // })
+        // var param = {};
+		// 	param.name = "홍길동";
+		// 	param.tel = "010-1234-5678";
+		// 	param.address = "율도국";
+			
+		// 	//ajax 호출
+		// 	$.ajax({
+		// 		//요청 서비스 url 지정
+		// 		url : "http://chb0110.synology.me:7858",
+		// 		//메소드 타입 지정
+		// 		type : "POST",
+		// 		//요청 시 서버로 전달할 데이터 지정
+		// 		data : param,
+		// 		//요청 성공 시 동작할 콜백 함수 지정
+		// 		success : function(data) {
+		// 			console.log(data);
+		// 			//p요소에 서버로부터 응답받은 데이터 표출
+		// 			$("#resp").html(data);
+		// 		}
+		// 	});
     });
+    function showform(){
+        if($('#agree').is(':checked')){
+            $('form').css("display","block");
+        }else{
+            $('form').css("display","none");
+        }
+    };
 </script>
 </html>
