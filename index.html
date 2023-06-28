@@ -4,79 +4,108 @@
     <meta charset="UTF-8">
     <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <title>Document</title>
 </head>
 <style>
+    @media (max-width:600px){
+        :root{
+            --body_whidth: 90%;
+            --font_size: 85%;
+        }
+    }
+
+    @media (min-width:601px){
+        :root{
+            --body_whidth: 80%;
+            --font_size: 90%;
+        }
+    }
+
+    @media (min-width:800px){
+        :root{
+            --body_whidth: 70%;
+            --font_size: 100%;
+        }
+    }
     body{
         text-align:center;
+        width: var(--body_whidth);
+        margin: 0 auto;
+        font-size: var(--font_size);
+    }
+    iframe{
+        width: var(--body_whidth);
+        height: 400px;
     }
 </style>
 <body>
-    
+    <h1>QuickJWU</h1>
+    <p>중원대학교 통합정보시스템을 크롤링하여 간단하게 정보를 얻어오고,<br>
+    필수 양식만 작성하면 크롤링봇이 직접 신청해 주는 웹사이트</p><hr>
+    <h2>민감데이터</h2>
+    <p style="font-size: 110%;">아래 내용을 동의하지 않으면 서비스를 이용할 수 없습니다.</p>
+    <iframe srcdoc="
+    <html>
+        <body>
+            <h3>학번과 패스워드 사용처</h3>
+            <p style='padding-left: 10pt'>학번과 패스워드는 아래와 같이 사용합니다.</p>
+            <p style='padding-left: 20pt'>1. 통합정보 시스템 로그인</p>
+            <p style='padding-left: 20pt'>2. 서비스 제공목적(학점보기, 신청하기 등.)</p>
+            <p style='padding-left: 10pt'>학번과 패스워드는 위 내용 이외에 목적으로 사용하지 않습니다.</p>
+            <h3>학번과 패스워드 저장</h3>
+            <p style='padding-left: 10pt'>학번과 패스워드는 아래와 같이 저장됩니다.</p>
+            <p style='padding-left: 20pt'>1. 백엔드 캐시(ApacheNiFi)</p>
+            <p style='padding-left: 20pt'>2. 백엔드 로그</p>
+            <h3>학번과 패스워드 열람자 및 보안이슈사항 관련</h3>
+            <p style='padding-left: 10pt'>- 학번과 패스워드 열람자는 관리자 외 열람할 수 없으며, 관리자는 열람 데이터를 다른곳에 활용하지 않습니다.</p>
+            <p style='padding-left: 10pt'>- 보안이슈가 발생할 경우 관리자는 책임지지 않습니다.</p>
+            <p style='padding-left: 10pt'>아래 내용에 해당하시는 분들만 서비스 이용을 할 수 있습니다.</p>
+            <p style='padding-left: 20pt'>1. 다른 포털에서 사용하지 않는 패스워드 사용자</p>
+            <p style='padding-left: 20pt'>2. 보안 이슈 발생 시 책임을 묻지 않는 사용자</p>
+            <h4>해당 내용에 '동의함'을 채크 시 , 서비스 이용 시 위 내용에 동의함을 간주합니다.</h4>
+        </body>
+    </html>
+    " frameborder="0">
+
+    </iframe>
 </body>
 <script>
+    class Human {
+        #age = 10;
+    }
+
+    const person = new Human();
+
     $(document).ready(function () {
-        document.cookie = "safeCookie1=foo; SameSite=Lax"; 
-        document.cookie = "safeCookie2=foo"; 
-        document.cookie = "crossCookie=bar; SameSite=None; Secure";
-        var no = 1;
-        var name = "차휘병";
-        var nick = "hbc";
-        $.ajax({
-            type : 'POST',           // 타입 (get, post, put 등등)
-            url : 'http://chb0110.synology.me:7858',           // 요청할 서버url
-            async : true,            // 비동기화 여부 (default : true)
-            // headers : {              // Http header
-            //     "Content-Type" : "application/json",
-            //     "X-HTTP-Method-Override" : "POST",
-            // },
-            // dataType : 'text',       // 데이터 타입 (html, xml, json, text 등등)
-            data : JSON.stringify({  // 보낼 데이터 (Object , String, Array)
-                "no" : no,
-                "name" : name,
-                "nick" : nick
-            }),
-            success : function(result) { // 결과 성공 콜백함수
-                console.log(result);
-            },
-            error : function(request, status, error) { // 결과 에러 콜백함수
-                console.log(error)
-            }
-        })
+        // var d = test(123);
+        // console.log(d.public);
+
+        
+        // document.cookie = "safeCookie1=foo; SameSite=Lax"; 
+        // document.cookie = "safeCookie2=foo"; 
+        // document.cookie = "crossCookie=bar; SameSite=None; Secure";
+        // var no = 1;
+        // var name = "차휘병";
+        // var nick = "hbc";
         // $.ajax({
-        //     url: "chb0110.synology.me:7858", // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
-        //     dataType: "jsonp",
-        //     method: "GET"   
-        // })
-        // .done(function(json) {
-        //     $('.tables').empty();
-        //     for (var i = 0; i < json[1].length ; i++){
-        //         $('.tables').append('<th>'+json[1][i]+'</th>');
+        //     type : 'POST',           // 타입 (get, post, put 등등)
+        //     url : 'http://chb0110.synology.me:7858',           // 요청할 서버url
+        //     async : true,            // 비동기화 여부 (default : true)
+        //     data : JSON.stringify({  // 보낼 데이터 (Object , String, Array)
+        //         "no" : no,
+        //         "name" : name,
+        //         "nick" : nick
+        //     }),
+        //     success : function(result) { // 결과 성공 콜백함수
+        //         console.log(result);
+        //     },
+        //     error : function(request, status, error) { // 결과 에러 콜백함수
+        //         console.log(error)
         //     }
-            
         // })
-        // var param = {};
-		// 	param.name = "홍길동";
-		// 	param.tel = "010-1234-5678";
-		// 	param.address = "율도국";
-			
-		// 	//ajax 호출
-		// 	$.ajax({
-		// 		//요청 서비스 url 지정
-		// 		url : "http://chb0110.synology.me:7858",
-		// 		//메소드 타입 지정
-		// 		type : "POST",
-		// 		//요청 시 서버로 전달할 데이터 지정
-		// 		data : param,
-		// 		//요청 성공 시 동작할 콜백 함수 지정
-		// 		success : function(data) {
-		// 			console.log(data);
-		// 			//p요소에 서버로부터 응답받은 데이터 표출
-		// 			$("#resp").html(data);
-		// 		}
-		// 	});
     });
+        
     function showform(){
         if($('#agree').is(':checked')){
             $('form').css("display","block");
