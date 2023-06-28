@@ -1,0 +1,45 @@
+@media (max-width:600px){
+    :root{
+        --body_whidth: 90%;
+        --font_size: 85%;
+    }
+}
+
+@media (min-width:601px){
+    :root{
+        --body_whidth: 80%;
+        --font_size: 90%;
+    }
+}
+
+@media (min-width:800px){
+    :root{
+        --body_whidth: 70%;
+        --font_size: 100%;
+    }
+}
+body{
+    text-align:center;
+    width: var(--body_whidth);
+    margin: 0 auto;
+    font-size: var(--font_size);
+}
+iframe{
+    width: var(--body_whidth);
+    height: 400px;
+}
+.input_area_p{
+    display: flex;
+    justify-content: center;
+}
+.input_area{
+    text-align: left;
+}
+
+.main{
+    width: var(--body_whidth);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    
+}
