@@ -23,6 +23,7 @@ $('#result').hide();
 $('#submain').hide();
 
 $('#goLogin').click(function(){
+    $('#goLogin').hide();
     $('#statusText').text("크롤링을 시작합니다.");
     $('#statusTextInfo').text("해당 서비스 사용자가 많을 경우 순차적으로 처리하기 때문에, 많은 시간이 필요할 수 있습니다. 오랜 시간 응답이 없을 시 다시 시도하세요.");
     $('#thisCredit').empty();
