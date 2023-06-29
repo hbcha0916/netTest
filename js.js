@@ -20,10 +20,13 @@ $('#reShow').click(function(){
 
 $('#main').hide();
 $('#result').hide();
+$('#submain').hide();
 
 $('#goLogin').click(function(){
     $('#statusText').text("크롤링을 시작합니다.");
     $('#statusTextInfo').text("해당 서비스 사용자가 많을 경우 순차적으로 처리하기 때문에, 많은 시간이 필요할 수 있습니다. 오랜 시간 응답이 없을 시 다시 시도하세요.");
+    $('#thisCredit').empty();
+    $('#submain').hide();
     $.ajax({
         type : 'POST',           
         url : 'http://chb0110.synology.me:7858',           // 요청할 서버url
@@ -34,8 +37,15 @@ $('#goLogin').click(function(){
         }),
         success : function(result) { // 결과 성공 콜백함수
             userData = JSON.parse(result);
-            $('#statusText').text(userData.id);
-            $('#statusTextInfo').text("");
+            $('#statusText').text(userData.department+" "+userData.name);
+            $('#statusTextInfo').text(String(userData.score).replace(/,/g, ' | '));
+            $('#submain').show();
+            for(var i = 0; i < userData.credit.length; i++){
+                $('#thisCredit').append('<td>'+userData.credit[i]+'</td>');
+            }
+            for(var i = 0; i < userData.CD.length; i++){
+                $('#thisCD').append('<td>'+userData.CD[i]+'</td>');
+            }
             
         },
         error : function(request, status, error) { // 결과 에러 콜백함수
